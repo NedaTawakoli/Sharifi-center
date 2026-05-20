@@ -11,6 +11,9 @@ class Sinf extends Model
     public function payment(){
         return $this->hasMany(Payment::class);
     }
+     public function student(){
+        return $this->belongsToMany(Student::class,'student_id');
+    }
     public function teacher(){
         return $this->belongsTo(Teacher::class);
     }
