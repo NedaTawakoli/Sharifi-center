@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Livewire\Teachers;
+
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
+use App\Models\Teacher;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+
+class EditTeacher extends Component implements HasActions, HasSchemas
+{
+    use InteractsWithActions;
+    use InteractsWithSchemas;
+
+    public Teacher $record;
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        $this->form->fill($this->record->attributesToArray());
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                //
+                 Section::make('Edit Payment')
+                ->description('Now you can edit the data of specific payment')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('name'),
+                    TextInput::make('Last Name'),
+                    TextInput::make('Degree of Edcucation'),
+                    TextInput::make('Sinf'),
+                    TextInput::make('Phone Number'),
+                    TextInput::make('Biography'),
+
+                ])
+            ])
+            ->statePath('data')
+            ->model($this->record);
+    }
+
+    public function save(): void
+    {
+        $data = $this->form->getState();
+
+        $this->record->update($data);
+    }
+
+    public function render(): View
+    {
+        return view('livewire.teachers.edit-teacher');
+    }
+}

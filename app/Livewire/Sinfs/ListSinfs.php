@@ -3,10 +3,12 @@
 namespace App\Livewire\Sinfs;
 
 use App\Models\Sinf;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\DatePicker;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
@@ -38,21 +40,31 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make("description")->limit(20),
             ])
             ->filters([
-                //
-                Filter::make("start_date")->label("Filter By Start Date")
-                ->form([
-                    DatePicker::make('start_date')->label("Start Date"),
-                ])->query(function (Builder $query, array $data): Builder {
-                    return $query->when($data ['start_date'],fn(Builder $query, $date): Builder =>
-                    $query->whereDate('start_date', $date)
-                    ),
-                })
+                // //
+                // Filter::make("start_date")->label("Filter By Start Date")
+                // ->form([
+                //     DatePicker::make('start_date')->label("Start Date"),
+                // ])->query(function (Builder $query, array $data): Builder {
+                //     return $query->when($data ['start_date'],fn(Builder $query, $date): Builder =>
+                //     $query->whereDate('start_date', $date),
+                //     ),
+                // })
             ])
             ->headerActions([
                 //
             ])
             ->recordActions([
                 //
+
+                 Action::make("Edit")
+                ->url(fn($record):string => route('sinfs.edit',$record))
+                ->openUrlInNewTab(),
+
+     Action::make('delete')
+    ->requiresConfirmation()
+    ->action(fn (Sinf $record) => $record->delete($record->id))->color('danger')->successNotification(
+        Notification::make()->title("Teacher deleted successfully")->success()
+     )
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use App\Models\Payment;
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 
 class ListPayments extends Component implements HasActions, HasSchemas, HasTable
@@ -28,7 +29,7 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ->query(fn (): Builder => Payment::query())
             ->columns([
                 //
-                TextColumn::make("Student.user.name")->label("Student Name")->sortable()->searchable(),
+                TextColumn::make("user.student.name")->label("Student Name")->sortable()->searchable(),
                 TextColumn::make("sinf.title")->label("Course Name")->sortable()->searchable(),
                 TextColumn::make("amount")->money("AFG"),
                 TextColumn::make("created_at")->date(),
@@ -41,6 +42,12 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                Action::make("Edit")
+                ->url(fn($record):string => route('payment.edit',$record))
+                ->openUrlInNewTab(),
+                Action::make('delete')
+    ->requiresConfirmation()
+    ->action(fn (Payment $record) => $record->delete($record->id))
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
