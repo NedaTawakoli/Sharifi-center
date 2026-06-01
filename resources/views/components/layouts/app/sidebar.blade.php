@@ -24,14 +24,18 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                 </flux:navlist.group>
                     <flux:navlist.group heading="Management" class="grid">
-                    <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item>
-                    <flux:navlist.item icon="user-circle" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage Students</flux:navlist.item>
-                    <flux:navlist.item icon="academic-cap" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item>
-                    <flux:navlist.item icon="building-library" :href="route('sinfs.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Class</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item> --}}
+                    <flux:navlist.item icon="user-group" :href="route('admins.index')" :current="request()->routeIs('admins.index')" wire:navigate>Manage Admin</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('jobs.index')" :current="request()->routeIs('jobs.index')" wire:navigate>Manage Job</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('job_dateils.index')" :current="request()->routeIs('job_dateils.index')" wire:navigate>Manage Job-Datiels</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('company.index')" :current="request()->routeIs('company.index')" wire:navigate>Manage Company</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="user-circle" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage Students</flux:navlist.item> --}}
+                    {{-- <flux:navlist.item icon="academic-cap" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item> --}}
+                    {{-- <flux:navlist.item icon="building-library" :href="route('sinfs.index')" :current="request()->routeIs('sinfs.index')" wire:navigate>Manage Class</flux:navlist.item> --}}
                 </flux:navlist.group>
                       <flux:navlist.group heading="Finance" class="grid">
-                    <flux:navlist.item icon="banknotes" :href="route('payment.index')" :current="request()->routeIs('payment.index')" wire:navigate>Student Payment </flux:navlist.item>
-                    <flux:navlist.item icon="scale" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Teacher Salaries</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="banknotes" :href="route('payment.index')" :current="request()->routeIs('payment.index')" wire:navigate>Student Payment </flux:navlist.item> --}}
+                    {{-- <flux:navlist.item icon="scale" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Teacher Salaries</flux:navlist.item> --}}
                 </flux:navlist.group>
             </flux:navlist>
 

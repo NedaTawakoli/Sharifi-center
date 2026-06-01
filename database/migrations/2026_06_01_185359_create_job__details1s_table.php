@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('job__details1s', function (Blueprint $table) {
             $table->id();
-             $table->date("start_date");
+
+            $table->date("start_date");
             $table->date("end_date");
             $table->text("description");
             $table->foreignId("job_id")->constrained("jobs")->onDelete("cascade")->onUpdate("cascade");

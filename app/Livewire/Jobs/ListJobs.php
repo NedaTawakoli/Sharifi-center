@@ -3,11 +3,14 @@
 namespace App\Livewire\Jobs;
 
 use App\Models\Job1;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -27,6 +30,11 @@ class ListJobs extends Component implements HasActions, HasSchemas, HasTable
             ->query(fn (): Builder => Job1::query())
             ->columns([
                 //
+                TextColumn::make("company_id"),
+                TextColumn::make("title"),
+                TextColumn::make("salary"),
+                TextColumn::make("type"),
+                TextColumn::make("location"),
             ])
             ->filters([
                 //
@@ -36,6 +44,11 @@ class ListJobs extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                   Action::make('delete')
+    ->requiresConfirmation()
+    ->action(fn (Job1 $record) => $record->delete($record->id))->color('danger')->successNotification(
+        Notification::make()->title("Job deleted successfully")->success()
+     )
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
