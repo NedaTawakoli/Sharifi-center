@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Livewire\Admins;
+namespace App\Livewire\Company;
 
-use App\Models\Admin1;
+use App\Models\Company;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
@@ -14,12 +13,12 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class EditAdmin extends Component implements HasActions, HasSchemas
+class EditCompany extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public Admin1 $record;
+    public Company $record;
 
     public ?array $data = [];
 
@@ -32,17 +31,13 @@ class EditAdmin extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                Section::make('Edit Admin')
-                ->description("You can Edit Admin")
+                Section::make('Edit Company')
+                ->description("You can Edit company")
                 ->columns(2)
                 ->schema([
-                    TextInput::make("user.admin.name"),
-                    TextInput::make("lastName"),
-                    TextInput::make("email"),
-                    TextInput::make("user_id"),
-                    FileUpload::make("image_url")
-                    ->disk('public')
-                    ->directory('AdminImages')
+                    TextInput::make("name"),
+                    TextInput::make("website"),
+                    TextInput::make("description"),
                 ])
             ])
             ->statePath('data')
@@ -58,6 +53,6 @@ class EditAdmin extends Component implements HasActions, HasSchemas
 
     public function render(): View
     {
-        return view('livewire.admins.edit-admin');
+        return view('livewire.company.edit-company');
     }
 }

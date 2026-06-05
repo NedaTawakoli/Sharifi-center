@@ -26,9 +26,14 @@
                     <flux:navlist.group heading="Management" class="grid">
                     {{-- <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item> --}}
                     <flux:navlist.item icon="user-group" :href="route('admins.index')" :current="request()->routeIs('admins.index')" wire:navigate>Manage Admin</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="user-plus" :href="route('admins.create')" :current="request()->routeIs('admins.create')" wire:navigate>Create Admin</flux:navlist.item> --}}
                     <flux:navlist.item icon="user-group" :href="route('jobs.index')" :current="request()->routeIs('jobs.index')" wire:navigate>Manage Job</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('jobs.create')" :current="request()->routeIs('jobs.create')" wire:navigate>Create Job</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('job_dateils.index')" :current="request()->routeIs('job_dateils.index')" wire:navigate>Manage Job-Datiels</flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('jobDateils.create')" :current="request()->routeIs('jobDateils.create')" wire:navigate>Create Job-Datiels</flux:navlist.item>
                     <flux:navlist.item icon="user-group" :href="route('company.index')" :current="request()->routeIs('company.index')" wire:navigate>Manage Company</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="user-group" :href="route('company.edit')" :current="request()->routeIs('company.edit')" wire:navigate>Edit Company</flux:navlist.item> --}}
+                    <flux:navlist.item icon="user-group" :href="route('company.create')" :current="request()->routeIs('company.create')" wire:navigate>Create Company</flux:navlist.item>
                     {{-- <flux:navlist.item icon="user-circle" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage Students</flux:navlist.item> --}}
                     {{-- <flux:navlist.item icon="academic-cap" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item> --}}
                     {{-- <flux:navlist.item icon="building-library" :href="route('sinfs.index')" :current="request()->routeIs('sinfs.index')" wire:navigate>Manage Class</flux:navlist.item> --}}

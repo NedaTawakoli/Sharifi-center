@@ -44,6 +44,9 @@ class ListJobs extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                   Action::make("Edit")
+                ->url(fn($record):string => route('jobs.edit',$record))
+                ->openUrlInNewTab(),
                    Action::make('delete')
     ->requiresConfirmation()
     ->action(fn (Job1 $record) => $record->delete($record->id))->color('danger')->successNotification(

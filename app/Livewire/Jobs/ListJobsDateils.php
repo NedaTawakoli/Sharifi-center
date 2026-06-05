@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Job_Details1;
+use App\Models\JobDetails;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
@@ -27,7 +28,7 @@ class ListJobsDateils extends Component implements HasActions, HasSchemas, HasTa
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn (): Builder => Job_Details1::query())
+            ->query(fn (): Builder => JobDetails::query())
             ->columns([
                 //
                 TextColumn::make("job_id"),
@@ -40,14 +41,18 @@ class ListJobsDateils extends Component implements HasActions, HasSchemas, HasTa
             ])
             ->headerActions([
                 //
-                   Action::make('delete')
-    ->requiresConfirmation()
-    ->action(fn (Job_Details1 $record) => $record->delete($record->id))->color('danger')->successNotification(
-        Notification::make()->title("Job Datiel deleted successfully")->success()
-     )
             ])
             ->recordActions([
-                //
+                Action::make("Edit")
+                ->badge()
+                ->url(fn($record):string => route('jobDetails.edit',$record))
+                ->openUrlInNewTab(),
+                             Action::make('delete')
+                             ->badge()
+    ->requiresConfirmation()
+    ->action(fn (JobDetails $record) => $record->delete($record->id))->color('danger')->successNotification(
+        Notification::make()->title("Job Datiel deleted successfully")->success()
+     )
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

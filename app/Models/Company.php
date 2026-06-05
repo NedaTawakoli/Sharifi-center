@@ -11,6 +11,7 @@ class Company extends Model
         "name",
         "website",
         "Description",
+        "logo"
     ];
     public function job(){
         return $this->hasMany(Job1::class);

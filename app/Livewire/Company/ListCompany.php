@@ -32,7 +32,6 @@ class ListCompany extends Component implements HasActions, HasSchemas, HasTable
             ->columns([
                 //
                 TextColumn::make("name"),
-                TextColumn::make("logo"),
                 TextColumn::make("website"),
                 TextColumn::make("description"),
             ])
@@ -43,7 +42,9 @@ class ListCompany extends Component implements HasActions, HasSchemas, HasTable
                 //
             ])
             ->recordActions([
-                //
+                Action::make("Edit")
+                ->url(fn($record):string => route('company.edit',$record))
+                ->openUrlInNewTab(),
                 Action::make('delete')
     ->requiresConfirmation()
     ->action(fn (Company $record) => $record->delete($record->id))->color('danger')->successNotification(

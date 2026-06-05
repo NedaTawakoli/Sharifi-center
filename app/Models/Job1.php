@@ -12,6 +12,8 @@ class Job1 extends Model
         'company_id',
         'title',
         'salary',
+        'type',
+        'location'
     ];
 
        public function company()
@@ -21,6 +23,6 @@ class Job1 extends Model
 
        public function detail()
     {
-        return $this->hasOne(Job_Details1::class);
+        return $this->hasOne(JobDetails::class);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Admins;
+namespace App\Livewire\Jobs;
 
-use App\Models\Admin1;
+use App\Models\Job1 as ModelsJob1;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\FileUpload;
@@ -12,52 +12,51 @@ use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
+use App\Models\Job1;
 use Livewire\Component;
 
-class EditAdmin extends Component implements HasActions, HasSchemas
+class CreateJob extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
-
-    public Admin1 $record;
 
     public ?array $data = [];
 
     public function mount(): void
     {
-        $this->form->fill($this->record->attributesToArray());
+        $this->form->fill();
     }
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Edit Admin')
-                ->description("You can Edit Admin")
+                Section::make('create Jobs')
+                ->description('Now you can create the data of specific Jobs')
                 ->columns(2)
                 ->schema([
-                    TextInput::make("user.admin.name"),
-                    TextInput::make("lastName"),
-                    TextInput::make("email"),
-                    TextInput::make("user_id"),
-                    FileUpload::make("image_url")
-                    ->disk('public')
-                    ->directory('AdminImages')
-                ])
+                    TextInput::make('company_id'),
+                    TextInput::make('title'),
+                    TextInput::make('salary'),
+                    TextInput::make('type'),
+                    TextInput::make('location'),
+                ]),
             ])
             ->statePath('data')
-            ->model($this->record);
+            ->model(Job1::class);
     }
 
-    public function save(): void
+    public function create(): void
     {
         $data = $this->form->getState();
 
-        $this->record->update($data);
+        $record = Job1::create($data);
+
+        $this->form->model($record)->saveRelationships();
     }
 
     public function render(): View
     {
-        return view('livewire.admins.edit-admin');
+        return view('livewire.jobs.create-job');
     }
 }

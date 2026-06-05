@@ -42,6 +42,9 @@ class ListAdmin extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                  Action::make("Edit")
+                ->url(fn($record):string => route('admins.edit',$record))
+                ->openUrlInNewTab(),
                  Action::make('delete')
     ->requiresConfirmation()
     ->action(fn (Admin1 $record) => $record->delete($record->id))->color('danger')->successNotification(

@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Livewire\Admins;
+namespace App\Livewire\Jobs;
 
-use App\Models\Admin1;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
+use App\Models\Job1;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Livewire\Component;
 
-class EditAdmin extends Component implements HasActions, HasSchemas
+class EditJob extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public Admin1 $record;
+    public Job1 $record;
 
     public ?array $data = [];
 
@@ -32,17 +31,15 @@ class EditAdmin extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                Section::make('Edit Admin')
-                ->description("You can Edit Admin")
+                Section::make('Edit Job')
+                ->description("You can Edit Jobs")
                 ->columns(2)
                 ->schema([
-                    TextInput::make("user.admin.name"),
-                    TextInput::make("lastName"),
-                    TextInput::make("email"),
-                    TextInput::make("user_id"),
-                    FileUpload::make("image_url")
-                    ->disk('public')
-                    ->directory('AdminImages')
+                    TextInput::make("title"),
+                    TextInput::make("salary"),
+                    TextInput::make("type"),
+                    TextInput::make("location"),
+                    TextInput::make("company_id"),
                 ])
             ])
             ->statePath('data')
@@ -58,6 +55,6 @@ class EditAdmin extends Component implements HasActions, HasSchemas
 
     public function render(): View
     {
-        return view('livewire.admins.edit-admin');
+        return view('livewire.jobs.edit-job');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admins;
 
-use App\Models\Admin1;
+use App\Models\Admin;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\FileUpload;
@@ -14,50 +14,39 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class EditAdmin extends Component implements HasActions, HasSchemas
+class CreateAdmin extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
-
-    public Admin1 $record;
 
     public ?array $data = [];
 
     public function mount(): void
     {
-        $this->form->fill($this->record->attributesToArray());
+        $this->form->fill();
     }
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Edit Admin')
-                ->description("You can Edit Admin")
-                ->columns(2)
-                ->schema([
-                    TextInput::make("user.admin.name"),
-                    TextInput::make("lastName"),
-                    TextInput::make("email"),
-                    TextInput::make("user_id"),
-                    FileUpload::make("image_url")
-                    ->disk('public')
-                    ->directory('AdminImages')
-                ])
+
             ])
             ->statePath('data')
-            ->model($this->record);
+            ->model(Admin::class);
     }
 
-    public function save(): void
+    public function create(): void
     {
         $data = $this->form->getState();
 
-        $this->record->update($data);
+        $record = Admin::create($data);
+
+        $this->form->model($record)->saveRelationships();
     }
 
     public function render(): View
     {
-        return view('livewire.admins.edit-admin');
+        return view('livewire.admins.create-admin');
     }
 }
