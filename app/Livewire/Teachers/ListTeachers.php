@@ -10,6 +10,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -36,6 +37,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make("sinf.title")->badge()->separator("-"),
                 TextColumn::make("salary.amount")->label("Amount")->expandableLimitedList(3)->listWithLineBreaks(),
                 TextColumn::make("lastName")->searchable()->sortable(),
+                // ImageColumn::make('image_url')->disk('public')->directory('teacher_images'),
                 TextColumn::make("bio")->limit(10)->toggleable(isToggledHiddenByDefault:false),
             ])
             ->filters([
@@ -43,6 +45,9 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                Action::make("createTeacher")
+                ->label("Create Teacher")
+                ->url(route('teacher.create')),
             ])
             ->recordActions([
                 //

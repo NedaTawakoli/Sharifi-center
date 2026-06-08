@@ -9,6 +9,15 @@ use App\Models\Sinf;
 class Teacher extends Model
 {
     //
+    protected $fillable = [
+        'lastName',
+        'phone_number',
+        'tazkira_number',
+        'image_url',
+        'degree-of-education',
+        'bio',
+        'user_id'
+    ];
     public function user(){
         return $this->belongsTo(User::class);
     }

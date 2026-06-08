@@ -31,8 +31,8 @@ class ListJobs extends Component implements HasActions, HasSchemas, HasTable
             ->columns([
                 //
                 TextColumn::make("company_id"),
-                TextColumn::make("title"),
-                TextColumn::make("salary"),
+                TextColumn::make("title")->searchable(),
+                TextColumn::make("salary")->sortable(),
                 TextColumn::make("type"),
                 TextColumn::make("location"),
             ])
