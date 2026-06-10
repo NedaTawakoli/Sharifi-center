@@ -36,7 +36,6 @@ class EditCompany extends Component implements HasActions, HasSchemas
                 ->columns(2)
                 ->schema([
                     TextInput::make("name"),
-                    TextInput::make("website"),
                     TextInput::make("description"),
                 ])
             ])

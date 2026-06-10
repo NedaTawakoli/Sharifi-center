@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId("company_id")->constrained("companies")->onDelete("cascade")->onUpdate("cascade");
             $table->text("title");
             $table->decimal("salary");
-            $table->string("type")->nullable();
             $table->string("location")->nullable();
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -43,6 +44,9 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                Action::make('CreateStudent')
+                ->label('Create New Student')
+                ->url(route('students.create')),
             ])
             ->recordActions([
                 //

@@ -32,14 +32,15 @@ class ListCompany extends Component implements HasActions, HasSchemas, HasTable
             ->columns([
                 //
                 TextColumn::make("name"),
-                TextColumn::make("website"),
                 TextColumn::make("description"),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                //
+                Action::make('CreateCompany')
+                ->label('Create New Company')
+                ->url(route('company.create')),
             ])
             ->recordActions([
                 Action::make("Edit")
